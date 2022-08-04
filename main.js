@@ -1,3 +1,5 @@
+import UI from './userInterface.js';
+
 window.addEventListener('load', () => {
     const screen = document.getElementById('screen1');
     const context = screen.getContext('2d');
@@ -12,12 +14,13 @@ window.addEventListener('load', () => {
             this.lives = 3;
             this.time = 0;
             this.gameOver = false;
+            this.UI = new UI(this);
         }
         update(timeDelta) {
             this.time += timeDelta;
         }
-        draw() {
-
+        draw(context) {
+            this.UI.draw(context);
         }
     }
 
@@ -28,9 +31,9 @@ window.addEventListener('load', () => {
         const timeDelta = timeStamp - lastTimeStamp;
         lastTimeStamp = timeStamp;
         context.fillStyle = 'black';
+        context.fillRect(0, 0, game.width, game.height);
         game.update(timeDelta);
         game.draw(context);
-        context.fillRect(0, 0, game.width, game.height);
         requestAnimationFrame(animate);
     }
     animate(0);
