@@ -4,7 +4,6 @@ export default class inputHandler {
         this.keys = {
             ArrowRight: false,
             ArrowLeft: false,
-            Space: false,
         };
         this.validKeys = Object.keys(this.keys)
         window.addEventListener('keydown', event => {
@@ -13,6 +12,9 @@ export default class inputHandler {
             }
             if (this.validKeys.includes(event.code)) {
                 this.keys[event.code] = true;
+            }
+            if (event.code === 'Space' && this.game.gameOver === false) {
+                this.game.paused = !this.game.paused;
             }
         })
         window.addEventListener('keyup', event => {

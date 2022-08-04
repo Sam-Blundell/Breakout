@@ -32,10 +32,12 @@ export default class Ball {
     }
     miss() {
         this.game.lives--;
-        this.vSpeed = 2;
-        this.hSpeed = 1;
-        this.xPos = (this.game.width / 2) - (this.size / 2);
-        this.yPos = this.game.height / 2;
+        if (this.game.lives > 0) {
+            this.vSpeed = 2;
+            this.hSpeed = 1;
+            this.xPos = (this.game.width / 2) - (this.size / 2);
+            this.yPos = this.game.height / 2;
+        }
     }
     paddleCheck() {
         const paddleLeftEdge = this.game.paddle.xPos;
