@@ -6,6 +6,7 @@ export default class Ball {
         this.yPos = this.game.height / 2;
         this.hSpeed = 1;
         this.vSpeed = 2;
+        this.hSpeedMax = 6;
         this.paddleHeight = this.game.paddle.yPos;
         this.paddleWidth = this.game.paddle.width;
     }
@@ -46,9 +47,11 @@ export default class Ball {
         const ballRightEdge = this.xPos + this.size;
         
         if (ballRightEdge >= paddleLeftEdge && ballLeftEdge <= paddleRightEdge) {
+            const offSet = ((ballLeftEdge + 3.5) - (paddleLeftEdge + 30)) / 15;
             this.game.score++;
             this.yPos = this.paddleHeight - this.size;
             this.vSpeed = -this.vSpeed * 1.1;
+            this.hSpeed = Math.min(Math.max(this.hSpeed + offSet, -this.hSpeedMax), this.hSpeedMax );
         }
     }
 }
