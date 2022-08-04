@@ -22,6 +22,7 @@ window.addEventListener('load', () => {
         }
         update(timeDelta) {
             this.time += timeDelta;
+            this.paddle.update();
         }
         draw(context) {
             this.UI.draw(context);
