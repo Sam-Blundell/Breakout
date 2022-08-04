@@ -14,8 +14,9 @@ window.addEventListener('load', () => {
             this.width = width;
             this.height = height;
             this.score = 0;
-            this.lives = 1;
+            this.lives = 3;
             this.time = 0;
+            this.intro = true;
             this.gameOver = false;
             this.paused = false;
             this.UI = new UI(this);
@@ -36,6 +37,12 @@ window.addEventListener('load', () => {
             this.paddle.draw(context);
             this.ball.draw(context);
         }
+        restart() {
+            this.score = 0;
+            this.lives = 4;
+            this.time = 0;
+            this.gameOver = false;
+        }
     }
 
     const game = new Game(screen.width, screen.height);
@@ -44,7 +51,7 @@ window.addEventListener('load', () => {
     const animate = (timeStamp) => {
         context.fillStyle = 'black';
         context.fillRect(0, 0, game.width, game.height);
-        if (game.paused === false) {
+        if (game.paused === false && game.intro === false) {
             const timeDelta = timeStamp - lastTimeStamp;
             lastTimeStamp = timeStamp;
             if (game.gameOver === false) {
