@@ -1,4 +1,5 @@
 import UI from './userInterface.js';
+import InputHandler from './inputHandler.js';
 
 window.addEventListener('load', () => {
     const screen = document.getElementById('screen1');
@@ -15,6 +16,7 @@ window.addEventListener('load', () => {
             this.time = 0;
             this.gameOver = false;
             this.UI = new UI(this);
+            this.input = new InputHandler(this);
         }
         update(timeDelta) {
             this.time += timeDelta;
