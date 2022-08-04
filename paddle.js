@@ -1,7 +1,7 @@
 export default class Paddle {
     constructor(game) {
         this.game = game;
-        this.width = 50;
+        this.width = 60;
         this.height = 6;
         this.xPos = (this.game.width / 2) - (this.width / 2);
         this.yPos = this.game.height - 50;

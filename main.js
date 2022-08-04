@@ -1,6 +1,7 @@
 import UI from './userInterface.js';
 import InputHandler from './inputHandler.js';
 import Paddle from './paddle.js';
+import Ball from './ball.js';
 
 window.addEventListener('load', () => {
     const screen = document.getElementById('screen1');
@@ -19,14 +20,17 @@ window.addEventListener('load', () => {
             this.UI = new UI(this);
             this.input = new InputHandler(this);
             this.paddle = new Paddle(this);
+            this.ball = new Ball(this);
         }
         update(timeDelta) {
             this.time += timeDelta;
             this.paddle.update();
+            this.ball.update();
         }
         draw(context) {
             this.UI.draw(context);
             this.paddle.draw(context);
+            this.ball.draw(context);
         }
     }
 
