@@ -4,6 +4,11 @@ import Paddle from './paddle.js';
 import Ball from './ball.js';
 import Brick from './brick.js';
 
+// TODO: 
+// Brickgrid class
+// Fix side collisions
+// fix stuck edge bug
+
 window.addEventListener('load', () => {
     const screen = document.getElementById('screen1');
     const context = screen.getContext('2d');
@@ -30,6 +35,13 @@ window.addEventListener('load', () => {
             this.buildGrid();
         }
         update(timeDelta) {
+            if ((this.bricks.filter(brick => brick.broken === false)).length === 0) {
+                console.log('test')
+                this.score += 100;
+                this.bricks.forEach(brick => brick.broken = false);
+                this.ball.vSpeedMin = 5;
+                this.paddle.xPos = (this.width / 2) - (this.paddle.width / 2);
+            }
             if (this.wasPaused) {
                 this.wasPaused = false;
             } else {
@@ -71,6 +83,7 @@ window.addEventListener('load', () => {
             this.score = 0;
             this.lives = 4;
             this.time = 0;
+            this.ball.vSpeedMin = 3;
             this.paddle.xPos = (this.width / 2) - (this.paddle.width / 2);
             this.bricks.forEach(brick => {
                 brick.broken = false;

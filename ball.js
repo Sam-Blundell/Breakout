@@ -6,6 +6,7 @@ export default class Ball {
         this.yPos = this.game.height / 2;
         this.hSpeed = 1;
         this.vSpeed = 3;
+        this.vSpeedMin = 3;
         this.hSpeedMax = 6;
         this.vSpeedMax = 12;
         this.paddleHeight = this.game.paddle.yPos;
@@ -42,7 +43,7 @@ export default class Ball {
         }
         this.game.lives--;
         if (this.game.lives > 0) {
-            this.vSpeed = 2;
+            this.vSpeed = this.vSpeedMin;
             this.hSpeed = 1;
             this.xPos = (this.game.width / 2) - (this.size / 2);
             this.yPos = this.game.height / 2;
