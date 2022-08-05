@@ -6,6 +6,7 @@ export default class Brick {
         this.width = 40;
         this.height = 10;
         this.broken = false;
+        this.hitNoise = document.getElementById('pong');
     }
     update() {
         if (this.broken === false) {
@@ -29,6 +30,9 @@ export default class Brick {
             this.yPos + this.height >= ballTop
         ) {
             this.broken = true;
+            if (this.game.mute === false) {
+                this.hitNoise.play();
+            }
             this.game.score++;
                 this.game.ball.vSpeed *= -1.01;
         }

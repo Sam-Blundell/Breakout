@@ -21,6 +21,7 @@ window.addEventListener('load', () => {
             this.gameOver = false;
             this.paused = false;
             this.wasPaused = true;
+            this.mute = false;
             this.UI = new UI(this);
             this.input = new InputHandler(this);
             this.paddle = new Paddle(this);

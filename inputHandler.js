@@ -25,6 +25,9 @@ export default class inputHandler {
             if (event.code === 'KeyR' && this.game.gameOver === true) {
                 this.game.restart();
             }
+            if (event.code === 'KeyM') {
+                this.game.mute = !this.game.mute;
+            }
         })
         window.addEventListener('keyup', event => {
             if (this.validKeys.includes(event.code)) {
