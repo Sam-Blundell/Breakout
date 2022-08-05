@@ -14,6 +14,9 @@ export default class inputHandler {
                 this.keys[event.code] = true;
             }
             if (event.code === 'Space' && this.game.gameOver === false && this.game.intro === false) {
+                if (this.game.paused) {
+                    this.game.wasPaused = true;
+                }
                 this.game.paused = !this.game.paused;
             }
             if (event.code === 'KeyS' && this.game.intro === true) {

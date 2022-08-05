@@ -2,6 +2,7 @@ import UI from './userInterface.js';
 import InputHandler from './inputHandler.js';
 import Paddle from './paddle.js';
 import Ball from './ball.js';
+import Brick from './brick.js';
 
 window.addEventListener('load', () => {
     const screen = document.getElementById('screen1');
@@ -19,15 +20,25 @@ window.addEventListener('load', () => {
             this.intro = true;
             this.gameOver = false;
             this.paused = false;
+            this.wasPaused = true;
             this.UI = new UI(this);
             this.input = new InputHandler(this);
             this.paddle = new Paddle(this);
             this.ball = new Ball(this);
+            this.bricks = [];
+            this.buildGrid();
         }
         update(timeDelta) {
-            this.time += timeDelta;
+            if (this.wasPaused) {
+                this.wasPaused = false;
+            } else {
+                this.time += timeDelta;
+            }
             this.paddle.update();
             this.ball.update();
+            this.bricks.forEach(brick => {
+                brick.update();
+            })
             if (this.lives === 0) {
                 this.gameOver = true;
             }
@@ -36,11 +47,33 @@ window.addEventListener('load', () => {
             this.UI.draw(context);
             this.paddle.draw(context);
             this.ball.draw(context);
+            this.bricks.forEach(brick => {
+                brick.draw(context);
+            })
+        }
+        buildGrid() {
+            const brickRows = 6;
+            const brickColumns = 10;
+            const brickSpacing = 8;
+            const brickXStart = 20;
+            const brickYStart = 100;
+            const brickWidth = 40;
+            const brickHeight = 10
+
+            for (let i = 1; i <= brickRows; i++) {
+                for (let j = 1; j <= brickColumns; j++) {
+                    this.bricks.push(new Brick(this, brickXStart + (j*brickWidth) + (j*brickSpacing), brickYStart + (i*brickHeight) + (i*brickSpacing)))
+                }
+            }
         }
         restart() {
             this.score = 0;
             this.lives = 4;
             this.time = 0;
+            this.paddle.xPos = (this.width / 2) - (this.paddle.width / 2);
+            this.bricks.forEach(brick => {
+                brick.broken = false;
+            })
             this.gameOver = false;
         }
     }

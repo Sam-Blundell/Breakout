@@ -7,12 +7,16 @@ export default class Ball {
         this.hSpeed = 1;
         this.vSpeed = 2;
         this.hSpeedMax = 6;
+        this.vSpeedMax = 12;
         this.paddleHeight = this.game.paddle.yPos;
         this.paddleWidth = this.game.paddle.width;
     }
     update() {
         this.yPos += this.vSpeed;
         this.xPos += this.hSpeed;
+        if (this.vSpeed > this.vSpeedMax) {
+            this.vSpeed = this.vSpeedMax;
+        }
         if (this.yPos <= 0) {
             this.vSpeed = -this.vSpeed;
             this.paddleChecked = false;
@@ -26,7 +30,6 @@ export default class Ball {
         if ((this.yPos + this.size) >= this.game.height) {
             this.miss();
         }
-
     }
     draw(context) {
         context.fillRect(this.xPos, this.yPos, this.size, this.size);

@@ -17,7 +17,7 @@ export default class UI {
         if (this.game.intro === true) {
             context.textAlign = 'center';
             context.font = `${this.fontSize * 2.5}px ${this.fontFamily}`;
-            context.fillText('SquashGame', this.game.width / 2, this.game.height / 2 - 100);
+            context.fillText('Breakout', this.game.width / 2, this.game.height / 2 - 100);
             context.font = `${this.fontSize * 0.8}px ${this.fontFamily}`;
             context.fillText('Move the paddle left and', this.game.width / 2, this.game.height / 2 - 50);
             context.fillText('right with the arrow keys.', this.game.width / 2, this.game.height / 2 - 10);
